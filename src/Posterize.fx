@@ -8,6 +8,14 @@ uniform int Levels
 	ui_tooltip = "Number of levels to separate colors into";
 > = 7;
 
+uniform float Amount
+<
+	ui_type = "input";
+	ui_label = "Amount";
+	ui_min = 0; ui_max = 1;
+	ui_tooltip = "Amount of effect to apply";
+> = .5;
+
 float3 PosterizePass(float4 position : SV_Position, float2 tex : TEXCOORD) : SV_Target
 {
 	float3 color = tex2D(ReShade::BackBuffer, tex).rgb;
@@ -21,7 +29,9 @@ float3 PosterizePass(float4 position : SV_Position, float2 tex : TEXCOORD) : SV_
 	int newG = (int)(round(bigG/(float)bs)*bs);
 	int newB = (int)(round(bigB/(float)bs)*bs);
 
-	return float3(newR/255.0, newG/255.0, newB/255.0);
+	float3 newColor = float3(newR/255.0, newG/255.0, newB/255.0);
+
+	return lerp(color, newColor, Amount);
 }
 
 technique Posterize
