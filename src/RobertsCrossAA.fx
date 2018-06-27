@@ -46,9 +46,9 @@ float3 RobertsCrossMaskPass(float4 position : SV_Position, float2 tex : TEXCOORD
 	float3 nc = sqrt((pow(gx,2) + pow(gx,2)));
 
 	if (nc.r > Thresh)
-		return float3(255.0,255.0,255.0);
+		return float3(0,0,255.0);
 	else
-		return float3(0,0,0);
+		return Src(ReShade::BackBuffer,  0,  0, tex);
 }
 
 float3 RobertsCrossFullPass(float4 position : SV_Position, float2 tex : TEXCOORD) : SV_Target
