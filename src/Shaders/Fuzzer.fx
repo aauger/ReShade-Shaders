@@ -29,7 +29,7 @@ float4 FuzzerPass(float4 position : SV_Position, float2 tex : TEXCOORD) : SV_Tar
 	return Src(rand_val * Multiplier, rand_val * Multiplier, tex);
 }
 
-technique Test
+technique Fuzzer
 {
 	pass
 	{
